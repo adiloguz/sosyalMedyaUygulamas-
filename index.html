@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adil Oğuz Sosyal medya demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f8fa;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0056b3;
+            margin: 0;
+        }
+
+        .header-icons img {
+            height: 28px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .header-icons .profile-pic {
+            border-radius: 50%;
+            border: 2px solid #0056b3;
+        }
+
+        .main-content {
+            padding: 20px 16px;
+        }
+
+        .story-section {
+            display: flex;
+            overflow-x: auto;
+            padding: 16px 0;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .story {
+            text-align: center;
+            margin-right: 12px;
+            width: 80px;
+        }
+
+        .story img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #ff6600;
+            margin-bottom: 6px;
+            object-fit: cover;
+        }
+
+        .story p {
+            font-size: 12px;
+            color: #333;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .card-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #0056b3;
+            object-fit: cover;
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+            color: #0056b3;
+        }
+
+        .card-content img {
+            width: 100%;
+            display: block;
+        }
+
+        .card-content.multi-img {
+            display: flex;
+            overflow-x: auto;
+        }
+
+        .card-content.multi-img img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+
+        .card-actions img {
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .card-actions .left-icons img {
+            margin-right: 10px;
+        }
+
+        .like-count {
+            font-weight: 500;
+            color: #333;
+            padding: 0 16px;
+            margin-bottom: 10px;
+        }
+
+        .comment-section {
+            padding: 0 16px 16px;
+        }
+
+        .comment-section input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .comment-section input:focus {
+            border-color: #0056b3;
+        }
+
+        .floating-action-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6600;
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .floating-action-button:hover {
+            background-color: #ff4500;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-action-button img {
+            height: 30px;
+        }
+
+        .explore-section, .suggestions-section, .events-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .explore-section h3, .suggestions-section h3, .events-section h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 20px;
+            color: #0056b3;
+        }
+
+        .suggestions-list, .events-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .suggestions-list li, .events-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .suggestions-list li img, .events-list li img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #0056b3;
+        }
+
+        .suggestions-list li p, .events-list li p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .suggestions-list li button, .events-list li button {
+            margin-left: auto;
+            padding: 6px 12px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .suggestions-list li button:hover, .events-list li button:hover {
+            background-color: #003f8c;
+        }
+
+        body {
+            margin-bottom: 60px; /* Alt menü için yer bırakıyor */
+        }
+
+           .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 10px 0;
+            box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-item img {
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .nav-item .profile-pic {
+            border-radius: 50%;
+            border: 2px solid #0056b3;
+}
+        
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Sosyal</h2>
+        <div class="header-icons">
+            <img src="https://img.icons8.com/ios-glyphs/30/0056b3/appointment-reminders--v1.png" alt="Bildirimler">
+            <img src="https://img.icons8.com/ios-glyphs/30/0056b3/filled-chat.png" alt="Mesajlar">
+            <img class="profile-pic" src="https://randomuser.me/api/portraits/men/33.jpg" alt="Profil">
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Story">
+                <p>Selin</p>
+            </div>
+            <div class="story">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User Story">
+                <p>Ali</p>
+            </div>
+            <div class="story">
+                <img src="https://randomuser.me/api/portraits/women/46.jpg" alt="User Story">
+                <p>Ayla</p>
+            </div>
+            <div class="story">
+                <img src="https://randomuser.me/api/portraits/men/47.jpg" alt="User Story">
+                <p>Mehmet</p>
+            </div>
+        </div>
+
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-header">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                <h3>Can Demir</h3>
+            </div>
+            <div class="card-content multi-img">
+                <img src="img/img2.jpg" alt="Post Image 1">
+                <img src="img/img3.jpg" alt="Post Image 2">
+                <img src="img/img4.jpg" alt="Post Image 3">
+                <img src="img/img5.jpg" alt="Post Image 4">
+            </div>
+            <div class="card-actions">
+                <div class="left-icons">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/like.png" alt="Like">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/comments.png" alt="Comment">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/share.png" alt="Share">
+                </div>
+                <img src="https://img.icons8.com/ios-glyphs/30/0056b3/bookmark-ribbon.png" alt="Save">
+            </div>
+            <div class="like-count">
+                <p>163 beğeni</p>
+            </div>
+            <div class="comment-section">
+                <input type="text" placeholder="Yorum ekle...">
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-header">
+                <img src="https://randomuser.me/api/portraits/women/31.jpg" alt="User">
+                <h3>Elif Çelik</h3>
+            </div>
+            <div class="card-content">
+                <img src="/img/img9.jpg" alt="Post Image">
+            </div>
+            <div class="card-actions">
+                <div class="left-icons">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/like.png" alt="Like">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/comments.png" alt="Comment">
+                    <img src="https://img.icons8.com/ios-glyphs/30/0056b3/share.png" alt="Share">
+                </div>
+                <img src="https://img.icons8.com/ios-glyphs/30/0056b3/bookmark-ribbon.png" alt="Save">
+            </div>
+            <div class="like-count">
+                <p>340 beğeni</p>
+            </div>
+            <div class="comment-section">
+                <input type="text" placeholder="Yorum ekle...">
+            </div>
+        </div>
+
+        <!-- Explore Section -->
+        <div class="explore-section">
+            <h3>Keşfet</h3>
+            <div class="card-content multi-img">
+                <img src="img/img6.jpg" alt="Explore Image 1">
+                <img src="img/img8.jpg" alt="Explore Image 2">
+                <img src="img/img9.jpg" alt="Explore Image 3">
+                <img src="img/img1.jpg" alt="Explore Image 4">
+            </div>
+        </div>
+
+        <!-- Suggestions Section -->
+        <div class="suggestions-section">
+            <h3>Arkadaş Önerileri</h3>
+            <ul class="suggestions-list">
+                <li>
+                    <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="Suggestion 1">
+                    <p>Burak Yılmaz</p>
+                    <button>Takip Et</button>
+                </li>
+                <li>
+                    <img src="https://randomuser.me/api/portraits/women/41.jpg" alt="Suggestion 2">
+                    <p>Zeynep Özkan</p>
+                    <button>Takip Et</button>
+                </li>
+                <li>
+                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Suggestion 3">
+                    <p>Emre Kaya</p>
+                    <button>Takip Et</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Events Section -->
+        <div class="events-section">
+            <h3>Yaklaşan Etkinlikler</h3>
+            <ul class="events-list">
+                <li>
+                    <img src="img/img11.jpg" alt="Event 1">
+                    <p>Web Geliştirici Konferansı</p>
+                    <button>Katıl</button>
+                </li>
+                <li>
+                    <img src="img/img12.jpg" alt="Event 2">
+                    <p>Dijital Pazarlama Zirvesi</p>
+                    <button>Katıl</button>
+                </li>
+                <li>
+                    <img src="img/img10.jpg" alt="Event 3">
+                    <p>Yazılım Atölyesi</p>
+                    <button>Katıl</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+    <div class="nav-item">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/home.png" alt="Home">
+    </div>
+    <div class="nav-item">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/search.png" alt="Search">
+    </div>
+    <div class="nav-item">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/plus-math.png" alt="Add">
+    </div>
+    <div class="nav-item">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/film-reel.png" alt="Reels">
+    </div>
+    <div class="nav-item">
+        <img class="profile-pic" src="https://randomuser.me/api/portraits/men/33.jpg" alt="Profile">
+    </div>
+   </div>
+
+    <!-- Kayan buton -->
+
+</body>
+</html>
